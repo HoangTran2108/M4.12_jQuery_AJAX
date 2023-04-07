@@ -12,17 +12,18 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/smartphones")
+@CrossOrigin("*")
 public class SmartphoneController {
     @Autowired
     private ISmartphoneService smartphoneService;
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Smartphone> createSmartphone(@RequestBody Smartphone smartphone) {
         return new ResponseEntity<>(smartphoneService.save(smartphone), HttpStatus.CREATED);
     }
     @GetMapping("/list")
     public ModelAndView getAllSmartphonePage() {
-        ModelAndView modelAndView = new ModelAndView("/phones/list");
+        ModelAndView modelAndView = new ModelAndView("demo");
         modelAndView.addObject("smartphones", smartphoneService.findAll());
         return modelAndView;
     }
